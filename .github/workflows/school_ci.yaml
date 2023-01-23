@@ -1,0 +1,14 @@
+name: ci-school-manager
+on:
+  pull_request:
+    branches:
+     - dev
+jobs:
+  check-application:
+    runs-on: ubuntu-latest
+    steps:
+     - uses: actions/checkout@v2
+     - uses: shivammathur/setup-php@v2
+     with:
+       php-version: '8.1'
+     - run: php artisan test
