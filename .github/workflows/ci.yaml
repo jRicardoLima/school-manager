@@ -12,6 +12,6 @@ jobs:
          mysql-version: '5.7'
      - run: mysql -uroot -h127.0.0.1 -e 'CREATE DATABASE school_manager_test'    
      - run: composer install
-     - run: mv .env-example .env
+     - run: mv .env.example .env
      - run: php artisan key:generate
      - run: php artisan test
