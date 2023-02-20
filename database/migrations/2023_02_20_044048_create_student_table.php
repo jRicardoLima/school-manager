@@ -13,23 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
             $table->string('name');
-            $table->decimal('salary');
-            $table->tinyInteger('per_hour')->default(0);
-            $table->tinyInteger('teacher')->default(0);
-            $table->date('birth_date')->nullable();
+            $table->date('birth_date');
             $table->string('sex')->nullable();
-            $table->string('cpf')->unique();
+            $table->string('cpf');
             $table->string('rg')->nullable();
-            $table->string('ctps_number')->nullable();
-            $table->string('ctps_serie')->nullable();
-            $table->foreignId('occupation_id')->constrained('occupations');
-            $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->string('responsible_name')->nullable();
+            $table->string('responsible_cpf')->nullable();
+            $table->string('kinsman')->nullable();
+            $table->string('has_disease');
+            $table->string('which_disease');
             $table->foreignId('school_id')->constrained('schools');
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -41,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists('students');
     }
 };
