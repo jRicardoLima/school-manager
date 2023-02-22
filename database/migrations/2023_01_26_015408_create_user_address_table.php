@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('telphone');
             $table->string('celphone');
             $table->morphs('addressable');
+            $table->foreignId('school_id')->constrained('schools');
             $table->softDeletes();
             $table->timestamps();
         });

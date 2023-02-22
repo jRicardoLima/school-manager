@@ -6,7 +6,9 @@ use DateTimeInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Profile extends Model
 {
@@ -19,6 +21,12 @@ class Profile extends Model
         'uuid',
         'name'
     ];
+    protected static function booted()
+    {
+       static::creating(function (Profile $profile){
+           $profile->uuid = Str::uuid();
+       });
+    }
 
     protected function serializeDate(DateTimeInterface $date)
     {
@@ -26,7 +34,8 @@ class Profile extends Model
     }
 
     //Relation
-    public function users(){
+    public function users(): HasMany
+    {
         return $this->hasMany(User::class,'profile_id','id');
     }
 
