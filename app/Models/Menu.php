@@ -6,6 +6,7 @@ use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Menu extends Model
 {
@@ -19,6 +20,13 @@ class Menu extends Model
       'name',
       'module'
     ];
+
+    protected static function booted(): void
+    {
+        static::creating(function (Menu $menu){
+            $menu->uuid = Str::uuid();
+        });
+    }
 
     protected function serializeDate(DateTimeInterface $date)
     {
